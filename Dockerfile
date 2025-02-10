@@ -11,8 +11,9 @@ WORKDIR /usr/src/edgeless_node
 # Install and configure openssl before building
 RUN apt-get update && apt-get install -y pkg-config libssl-dev build-essential cmake
 
+ENV CARGO_BUILD_JOBS=1
 ENV OPENSSL_NO_ASM=1
-RUN cargo build --release --bin edgeless_node_d --verbose
+RUN cargo build --release -C codegen-units=1 -C incremental --bin edgeless_node_d --verbose
 
 # Execution stage
 FROM debian:bookworm-slim
