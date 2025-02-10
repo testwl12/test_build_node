@@ -9,7 +9,7 @@ COPY . .
 WORKDIR /usr/src/edgeless_node
 
 # Install and configure openssl before building
-RUN apt-get update && apt-get install -y pkg-config libssl-dev
+RUN apt-get update && apt-get install -y pkg-config libssl-dev build-essential cmake
 
 ENV OPENSSL_NO_ASM=1
 RUN cargo build --release --bin edgeless_node_d --verbose
